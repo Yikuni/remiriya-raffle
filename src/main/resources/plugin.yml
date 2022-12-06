@@ -1,0 +1,6 @@
+name: RemiriyaRaffle
+version: '${project.version}'
+main: com.yikuni.mc.remiriyaraffle.RemiriyaRaffle
+api-version: 1.19
+depend: [ RumiyaLib ]
+authors: [ yikuni ]
