@@ -4,10 +4,12 @@ import com.yikuni.db.main.JsonSerializeStrategy
 import com.yikuni.db.main.Table
 import com.yikuni.mc.remiyaraffle.RemiriyaRaffle
 import org.bukkit.ChatColor
+import org.bukkit.NamespacedKey
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
 object RaffleManager {
+    val key = NamespacedKey(RemiriyaRaffle.getInstance(), "raffle_chest_name")
     lateinit var raffleTable: Table<RaffleChest>
 
     fun initTable(){
@@ -66,7 +68,7 @@ object RaffleManager {
         return nameList.toString()
     }
 
-    private fun getRaffleChest(name: String): RaffleChest?{
+    fun getRaffleChest(name: String): RaffleChest?{
         return raffleTable.select(RaffleChest(name))[0]
     }
 }

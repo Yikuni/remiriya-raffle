@@ -5,11 +5,15 @@ import com.yikuni.mc.reflect.context.menu.MenuFacade
 import com.yikuni.mc.remiyaraffle.raffle.RaffleItem
 import com.yikuni.mc.remiyaraffle.raffle.RaffleManager
 import com.yikuni.mc.rumiyalib.utils.sender
+import org.bukkit.Material
+import org.bukkit.block.TileState
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.persistence.PersistentDataType
 
 @YikuniCommand(value = "raffle", description = "抽奖有关指令")
 class RaffleCommand: CommandExecutor, TabCompleter {
@@ -62,6 +66,42 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                         true
                     }else false
                 }
+                "place" ->{
+                    if (args.size > 1){
+                        val chest = sender.location.block
+                        if (args.size == 3){
+                            chest.type = when(args[2]){
+                                "1" -> Material.ENDER_CHEST
+                                "2" -> Material.SHULKER_BOX
+                                else -> Material.CHEST
+                            }
+                        }else{
+                            chest.type = Material.CHEST
+                        }
+                        val state = chest.state as TileState
+                        state.persistentDataContainer[RaffleManager.key, PersistentDataType.STRING] = args[1]
+                        state.update()
+                        sender.sender().success("宝箱已生成")
+                        true
+                    }else false
+                }
+                "key" ->{
+                    if (args.size == 2){
+                        val itemStack = sender.inventory.itemInMainHand
+                        if (itemStack == null){
+                            sender.sender().warn("请确保手上有物品再设置钥匙")
+                            return true
+                        }
+                        val meta = itemStack.itemMeta!!
+                        meta.persistentDataContainer[RaffleManager.key, PersistentDataType.STRING] = args[1]
+                        meta.addEnchant(Enchantment.LUCK, 1, true)
+                        itemStack.itemMeta = meta
+                        sender.inventory.addItem(itemStack)
+                        sender.sender().success("钥匙设置成功")
+                    }
+                    true
+                }
+
                 else ->false
             }
         }else false
@@ -82,12 +122,12 @@ class RaffleCommand: CommandExecutor, TabCompleter {
     ): MutableList<String>? {
         return when(args.size){
             1 ->{
-                listOf("create", "remove", "addItem", "removeItem", "list", "help", "show")
+                listOf("create", "remove", "addItem", "removeItem", "list", "help", "show", "place", "key")
             }
             2 ->{
                 when(args[0]){
                     "create" -> listOf("宝箱名")
-                    "remove", "removeItem", "addItem", "show" -> RaffleManager.getAllChestNames()
+                    "remove", "removeItem", "addItem", "show", "place", "key" -> RaffleManager.getAllChestNames()
                     else -> null
                 }
             }
@@ -95,6 +135,7 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                 when(args[0]){
                     "removeItem" -> listOf("<移除物品的序号>")
                     "addItem" -> listOf("hand", "inventory")
+                    "place" -> listOf("CHEST", "ENDER_CHEST", "SHULKER_BOX")
                     else -> null
                 }
             }

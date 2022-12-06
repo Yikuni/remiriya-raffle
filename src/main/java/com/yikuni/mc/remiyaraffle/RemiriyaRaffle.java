@@ -9,12 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 
 public final class RemiriyaRaffle extends JavaPlugin {
+    private static RemiriyaRaffle INSTANCE;
     public static Database database;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         PluginLoader.run(RemiriyaRaffle.class);
+        INSTANCE = this;
         initDatabase();
     }
 
@@ -22,6 +24,8 @@ public final class RemiriyaRaffle extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
+
+    public static RemiriyaRaffle getInstance(){return INSTANCE;}
 
     private void initDatabase(){
         try {
