@@ -1,23 +1,21 @@
 package com.yikuni.mc.remiyaraffle.raffle
 
+import com.yikuni.mc.rumiyalib.inventory.InventoryItem
 import com.yikuni.mc.rumiyalib.utils.getItemText
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ComponentBuilder
 import net.md_5.bungee.api.chat.TextComponent
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-class RaffleItem(
-    var itemStack: ItemStack, var weight: Int,
-    val playerGetItem: (Player) -> Unit = fun (player: Player) {
-        val item = player.inventory.addItem(itemStack)
-        if (item.isNotEmpty()){
-            item.forEach { (_, itemStack) ->
-                player.world.dropItem(player.location, itemStack)
-            }
-        }
-    }) {
-
+class RaffleItem() {
+    lateinit var inventoryItem: InventoryItem
+    var weight: Int = 1
+    private lateinit var itemStack: ItemStack
+    constructor(itemStack: ItemStack, weight: Int): this(){
+        inventoryItem = InventoryItem.fromItemStack(itemStack)
+        this.weight = weight
+        this.itemStack = itemStack
+    }
     private fun getRare():String{
         return when(weight){
             0 -> "${org.bukkit.ChatColor.RED}不可获得"
@@ -46,12 +44,16 @@ class RaffleItem(
     }
 
     fun provideGuiItem(): ItemStack{
-        val item = itemStack
+        val item = itemStack.clone()
         val itemMeta = item.itemMeta!!
         if (itemMeta.lore == null) itemMeta.lore = mutableListOf(getRare())
         else itemMeta.lore!!.add(getRare())
 
         item.itemMeta = itemMeta
         return item
+    }
+
+    fun provideItemStack(): ItemStack{
+        return itemStack
     }
 }

@@ -23,6 +23,7 @@ public final class RemiriyaRaffle extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        database.save();
     }
 
     public static RemiriyaRaffle getInstance(){return INSTANCE;}

@@ -1,6 +1,9 @@
 name: RemiriyaRaffle
 version: '${project.version}'
-main: com.yikuni.mc.remiriyaraffle.RemiriyaRaffle
+main: com.yikuni.mc.remiyaraffle.RemiriyaRaffle
 api-version: 1.19
 depend: [ RumiyaLib ]
 authors: [ yikuni ]
+
+commands:
+  raffle:

@@ -2,9 +2,11 @@ package com.yikuni.mc.remiyaraffle.command
 
 import com.yikuni.mc.reflect.annotation.YikuniCommand
 import com.yikuni.mc.reflect.context.menu.MenuFacade
+import com.yikuni.mc.remiyaraffle.RemiriyaRaffle
 import com.yikuni.mc.remiyaraffle.raffle.RaffleItem
 import com.yikuni.mc.remiyaraffle.raffle.RaffleManager
 import com.yikuni.mc.rumiyalib.utils.sender
+import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.block.TileState
 import org.bukkit.command.Command
@@ -17,7 +19,17 @@ import org.bukkit.persistence.PersistentDataType
 
 @YikuniCommand(value = "raffle", description = "抽奖有关指令")
 class RaffleCommand: CommandExecutor, TabCompleter {
-    private val usage = "TODO"
+    private val usage = "${ChatColor.YELLOW} --------${ChatColor.WHITE} Help Raffle ${ChatColor.YELLOW}--------\n" +
+            "${ChatColor.GRAY} Below is a help list of Raffle command \n" +
+            "${ChatColor.GOLD} /raffle create <宝箱名>: ${ChatColor.WHITE}创建抽奖箱 \n" +
+            "${ChatColor.GOLD} /raffle remove <宝箱名>: ${ChatColor.WHITE}移除抽奖箱 \n" +
+            "${ChatColor.GOLD} /raffle addItem <宝箱名> [hand/inventory] <权重>: ${ChatColor.WHITE}添加抽奖箱物品 \n" +
+            "${ChatColor.GOLD} /raffle removeItem <宝箱名> <移除物品编号>: ${ChatColor.WHITE}移除抽奖箱指定物品 \n" +
+            "${ChatColor.GOLD} /raffle place <宝箱名> <抽奖箱类别>: ${ChatColor.WHITE}放置抽奖箱 \n" +
+            "${ChatColor.GOLD} /raffle list <宝箱名>: ${ChatColor.WHITE}展示现有抽奖箱列表 \n" +
+            "${ChatColor.GOLD} /raffle show <宝箱名>: ${ChatColor.WHITE}打开Admin抽奖箱预览页面 \n" +
+            "${ChatColor.GOLD} /raffle key <宝箱名>: ${ChatColor.WHITE}将手中物品设置为抽奖箱钥匙 \n" +
+            "${ChatColor.GOLD} /raffle save: ${ChatColor.WHITE}保存更改\n "
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) return false
         val isFormatValid = if (args.isNotEmpty()){
@@ -52,7 +64,7 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                 }
                 "removeItem" ->{
                     if (args.size == 3){
-                        sender.sender().primary(RaffleManager.removeRaffleItem(args[1], args[2].toInt()))
+                        sender.sender().primary(RaffleManager.removeRaffleItem(args[1], args[2].toInt() - 1))
                         true
                     }else false
                 }
@@ -71,8 +83,8 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                         val chest = sender.location.block
                         if (args.size == 3){
                             chest.type = when(args[2]){
-                                "1" -> Material.ENDER_CHEST
-                                "2" -> Material.SHULKER_BOX
+                                "ENDER_CHEST" -> Material.ENDER_CHEST
+                                "SHULKER_BOX" -> Material.SHULKER_BOX
                                 else -> Material.CHEST
                             }
                         }else{
@@ -96,9 +108,13 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                         meta.persistentDataContainer[RaffleManager.key, PersistentDataType.STRING] = args[1]
                         meta.addEnchant(Enchantment.LUCK, 1, true)
                         itemStack.itemMeta = meta
-                        sender.inventory.addItem(itemStack)
                         sender.sender().success("钥匙设置成功")
                     }
+                    true
+                }
+                "save" ->{
+                    RemiriyaRaffle.database.save()
+                    sender.sender().success("保存成功")
                     true
                 }
 
@@ -122,7 +138,7 @@ class RaffleCommand: CommandExecutor, TabCompleter {
     ): MutableList<String>? {
         return when(args.size){
             1 ->{
-                listOf("create", "remove", "addItem", "removeItem", "list", "help", "show", "place", "key")
+                listOf("create", "remove", "addItem", "removeItem", "list", "help", "show", "place", "key", "save")
             }
             2 ->{
                 when(args[0]){

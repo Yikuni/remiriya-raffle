@@ -32,6 +32,9 @@ class RaffleListener: Listener {
                 val key = event.player.inventory.itemInMainHand?:return
                 val container1 = key.itemMeta?.persistentDataContainer?:return
                 val s = container1[RaffleManager.key, PersistentDataType.STRING]?:return
+                if (s != name){
+                    return
+                }
                 val select = RaffleManager.raffleTable.select(RaffleChest(name))
                 if (select.isEmpty()){
                     event.player.sender().error("不存在该抽奖箱")

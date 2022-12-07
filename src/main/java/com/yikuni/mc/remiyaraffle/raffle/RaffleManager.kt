@@ -9,7 +9,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
 object RaffleManager {
-    val key = NamespacedKey(RemiriyaRaffle.getInstance(), "raffle_chest_name")
+    val key = NamespacedKey("remiriyaraffle", "raffle_chest_name")
     lateinit var raffleTable: Table<RaffleChest>
 
     fun initTable(){
@@ -62,13 +62,15 @@ object RaffleManager {
         val nameList = StringBuilder()
         nameList.append("${ChatColor.DARK_GREEN}======抽奖箱列表=====")
         raffleTable.data.forEach {
-            nameList.append("\n${it.name}")
+            nameList.append("\n${ChatColor.WHITE}${it.name}")
         }
-        nameList.append("${ChatColor.DARK_GREEN}===============")
+        nameList.append("\n${ChatColor.DARK_GREEN}======抽奖箱列表=====")
+
         return nameList.toString()
     }
 
     fun getRaffleChest(name: String): RaffleChest?{
-        return raffleTable.select(RaffleChest(name))[0]
+        val select = raffleTable.select(RaffleChest(name))
+        return if (select.isEmpty()) null else select[0]
     }
 }

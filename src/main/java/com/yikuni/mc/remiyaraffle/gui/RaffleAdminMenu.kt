@@ -15,7 +15,10 @@ class RaffleAdminMenu(): Menu() {
         this.size = size
     }
     override fun click(event: InventoryClickEvent) {
-        val itemStack = event.currentItem ?: return
+        val itemStack = event.currentItem?.clone()?:return
+        val itemMeta = itemStack.itemMeta!!
+        itemMeta.lore!!.removeLast()
+        itemStack.itemMeta = itemMeta
         (event.whoClicked as Player).giveItem(itemStack)
     }
 
