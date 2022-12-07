@@ -1,6 +1,7 @@
 package com.yikuni.mc.remiriyaraffle.raffle
 
 import com.yikuni.mc.remiriyaraffle.event.PlayerRaffleEvent
+import com.yikuni.mc.rumiyalib.inventory.InventoryItem
 import com.yikuni.mc.rumiyalib.utils.giveItem
 import org.bukkit.Bukkit
 import org.bukkit.Particle
@@ -38,7 +39,7 @@ class RaffleChest() {
     }
 
     fun addItem(itemStack: ItemStack, weight: Int){
-        itemList.add(RaffleItem(itemStack, weight))
+        itemList.add(RaffleItem(InventoryItem.fromItemStack(itemStack), weight))
     }
 
     fun removeItem(index: Int){

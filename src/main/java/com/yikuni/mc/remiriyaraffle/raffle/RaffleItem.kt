@@ -11,10 +11,10 @@ class RaffleItem() {
     lateinit var inventoryItem: InventoryItem
     var weight: Int = 1
     private lateinit var itemStack: ItemStack
-    constructor(itemStack: ItemStack, weight: Int): this(){
-        inventoryItem = InventoryItem.fromItemStack(itemStack)
+    constructor(inventoryItem: InventoryItem, weight: Int): this(){
+        this.inventoryItem = inventoryItem
         this.weight = weight
-        this.itemStack = itemStack
+        this.itemStack = InventoryItem.of(inventoryItem)
     }
     private fun getRare():String{
         return when(weight){

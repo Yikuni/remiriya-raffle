@@ -1,5 +1,4 @@
-import com.yikuni.mc.remiyaraffle.raffle.RaffleChest;
-import com.yikuni.mc.remiyaraffle.raffle.RaffleItem;
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleItem;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
