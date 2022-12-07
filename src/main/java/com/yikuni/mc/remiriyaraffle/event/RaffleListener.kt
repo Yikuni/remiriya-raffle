@@ -1,9 +1,9 @@
-package com.yikuni.mc.remiyaraffle.event
+package com.yikuni.mc.remiriyaraffle.event
 
 import com.yikuni.mc.reflect.annotation.YikuniEvent
 import com.yikuni.mc.reflect.context.menu.MenuFacade
-import com.yikuni.mc.remiyaraffle.raffle.RaffleChest
-import com.yikuni.mc.remiyaraffle.raffle.RaffleManager
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleChest
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleManager
 import com.yikuni.mc.rumiyalib.utils.sender
 import org.bukkit.Material
 import org.bukkit.block.TileState

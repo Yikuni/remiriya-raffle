@@ -1,8 +1,10 @@
-package com.yikuni.mc.remiyaraffle.raffle
+package com.yikuni.mc.remiriyaraffle.raffle
 
-import com.yikuni.mc.remiyaraffle.event.PlayerRaffleEvent
+import com.yikuni.mc.remiriyaraffle.event.PlayerRaffleEvent
 import com.yikuni.mc.rumiyalib.utils.giveItem
 import org.bukkit.Bukkit
+import org.bukkit.Particle
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
@@ -27,6 +29,8 @@ class RaffleChest() {
             i -= it.weight
             if (i < 0){
                 player.giveItem(it.provideItemStack())
+                player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 0.18F, 0.6F)
+                player.world.spawnParticle(Particle.TOTEM, player.location, 10, 0.5, 0.5, 0.5)
                 Bukkit.getPluginManager().callEvent(PlayerRaffleEvent(player, it.provideItemStack()))
                 return
             }

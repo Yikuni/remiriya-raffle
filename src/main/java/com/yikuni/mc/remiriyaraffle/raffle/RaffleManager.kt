@@ -1,8 +1,8 @@
-package com.yikuni.mc.remiyaraffle.raffle
+package com.yikuni.mc.remiriyaraffle.raffle
 
 import com.yikuni.db.main.JsonSerializeStrategy
 import com.yikuni.db.main.Table
-import com.yikuni.mc.remiyaraffle.RemiriyaRaffle
+import com.yikuni.mc.remiriyaraffle.RemiriyaRaffle
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.Inventory

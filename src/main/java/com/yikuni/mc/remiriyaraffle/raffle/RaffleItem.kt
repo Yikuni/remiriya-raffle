@@ -1,4 +1,4 @@
-package com.yikuni.mc.remiyaraffle.raffle
+package com.yikuni.mc.remiriyaraffle.raffle
 
 import com.yikuni.mc.rumiyalib.inventory.InventoryItem
 import com.yikuni.mc.rumiyalib.utils.getItemText

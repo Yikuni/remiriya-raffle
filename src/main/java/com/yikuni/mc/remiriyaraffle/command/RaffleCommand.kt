@@ -1,10 +1,9 @@
-package com.yikuni.mc.remiyaraffle.command
+package com.yikuni.mc.remiriyaraffle.command
 
 import com.yikuni.mc.reflect.annotation.YikuniCommand
 import com.yikuni.mc.reflect.context.menu.MenuFacade
-import com.yikuni.mc.remiyaraffle.RemiriyaRaffle
-import com.yikuni.mc.remiyaraffle.raffle.RaffleItem
-import com.yikuni.mc.remiyaraffle.raffle.RaffleManager
+import com.yikuni.mc.remiriyaraffle.RemiriyaRaffle
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleManager
 import com.yikuni.mc.rumiyalib.utils.sender
 import org.bukkit.ChatColor
 import org.bukkit.Material

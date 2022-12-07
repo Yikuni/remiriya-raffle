@@ -1,8 +1,8 @@
-package com.yikuni.mc.remiyaraffle.gui
+package com.yikuni.mc.remiriyaraffle.gui
 
 import com.yikuni.mc.reflect.annotation.YikuniMenu
 import com.yikuni.mc.reflect.common.Menu
-import com.yikuni.mc.remiyaraffle.raffle.RaffleManager
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleManager
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.Inventory

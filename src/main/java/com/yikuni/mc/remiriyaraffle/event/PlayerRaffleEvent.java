@@ -1,4 +1,4 @@
-package com.yikuni.mc.remiyaraffle.event;
+package com.yikuni.mc.remiriyaraffle.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;

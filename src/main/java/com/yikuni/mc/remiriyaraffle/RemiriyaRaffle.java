@@ -1,9 +1,9 @@
-package com.yikuni.mc.remiyaraffle;
+package com.yikuni.mc.remiriyaraffle;
 
 import com.yikuni.db.exception.YikuniDBException;
 import com.yikuni.db.main.Database;
 import com.yikuni.mc.reflect.PluginLoader;
-import com.yikuni.mc.remiyaraffle.raffle.RaffleManager;
+import com.yikuni.mc.remiriyaraffle.raffle.RaffleManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
