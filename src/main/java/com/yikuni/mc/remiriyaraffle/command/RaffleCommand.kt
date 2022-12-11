@@ -35,7 +35,7 @@ class RaffleCommand: CommandExecutor, TabCompleter {
             when(args[0]){
                 "create" ->{
                     if (args.size == 2){
-                        sender.sender().primary(RaffleManager.createRaffleChest(args[1]))
+                        sender.sender().primary(if (RaffleManager.createRaffleChest(args[1]) == null) "已经存在该宝箱" else "添加宝箱成功")
                         true
                     }else false
                 }

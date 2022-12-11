@@ -9,10 +9,13 @@ import org.jetbrains.annotations.NotNull;
 public class PlayerRaffleEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
     private final ItemStack itemStack;
-
-    public PlayerRaffleEvent(@NotNull Player who, @NotNull ItemStack itemStack) {
+    private final String chestName;
+    private final int weight;
+    public PlayerRaffleEvent(@NotNull Player who, @NotNull ItemStack itemStack, @NotNull String chestName, @NotNull int weight) {
         super(who);
         this.itemStack = itemStack;
+        this.chestName = chestName;
+        this.weight = weight;
     }
 
     @NotNull
@@ -26,5 +29,13 @@ public class PlayerRaffleEvent extends PlayerEvent {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    public String getChestName() {
+        return chestName;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

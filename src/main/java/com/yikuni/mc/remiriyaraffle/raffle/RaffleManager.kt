@@ -23,12 +23,13 @@ object RaffleManager {
         return raffleTable.data.map { it.name }
     }
 
-    fun createRaffleChest(name: String): String{
+    fun createRaffleChest(name: String): RaffleChest?{
         if (getRaffleChest(name) != null){
-            return "该抽奖箱已存在";
+            return null
         }
-        raffleTable.add(RaffleChest(name))
-        return "添加成功"
+        val raffleChest = RaffleChest(name)
+        raffleTable.add(raffleChest)
+        return raffleChest
     }
 
     fun removeRaffleChest(name: String): String{

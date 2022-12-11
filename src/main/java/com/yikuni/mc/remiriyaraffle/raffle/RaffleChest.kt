@@ -32,7 +32,7 @@ class RaffleChest() {
                 player.giveItem(it.provideItemStack())
                 player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 0.18F, 0.6F)
                 player.world.spawnParticle(Particle.TOTEM, player.location, 10, 0.5, 0.5, 0.5)
-                Bukkit.getPluginManager().callEvent(PlayerRaffleEvent(player, it.provideItemStack()))
+                Bukkit.getPluginManager().callEvent(PlayerRaffleEvent(player, it.provideItemStack(), name, it.weight))
                 return
             }
         }
@@ -48,6 +48,8 @@ class RaffleChest() {
         }
     }
 
-
+    fun containsItem(name: String): Boolean{
+        return itemList.any { it.inventoryItem.name == name }
+    }
 
 }
