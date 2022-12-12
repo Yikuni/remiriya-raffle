@@ -29,7 +29,7 @@
 
     <groupId>com.yikuni.mc</groupId>
     <artifactId>remiriya-raffle</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>remiriya-raffle</name>
@@ -179,6 +179,7 @@
     </repositories>
 
     <dependencies>
+
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -188,7 +189,7 @@
         <dependency>
             <groupId>com.yikuni.mc</groupId>
             <artifactId>rumiya-lib</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -204,7 +205,7 @@
         <dependency>
             <groupId>com.yikuni</groupId>
             <artifactId>spigot-reflect</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -217,6 +218,12 @@
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core-jvm</artifactId>
+            <version>1.6.0-native-mt</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <distributionManagement>

@@ -5,6 +5,9 @@ import com.yikuni.mc.reflect.context.menu.MenuFacade
 import com.yikuni.mc.remiriyaraffle.RemiriyaRaffle
 import com.yikuni.mc.remiriyaraffle.raffle.RaffleManager
 import com.yikuni.mc.rumiyalib.utils.sender
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.block.TileState
@@ -28,7 +31,7 @@ class RaffleCommand: CommandExecutor, TabCompleter {
             "${ChatColor.GOLD} /raffle list <宝箱名>: ${ChatColor.WHITE}展示现有抽奖箱列表 \n" +
             "${ChatColor.GOLD} /raffle show <宝箱名>: ${ChatColor.WHITE}打开Admin抽奖箱预览页面 \n" +
             "${ChatColor.GOLD} /raffle key <宝箱名>: ${ChatColor.WHITE}将手中物品设置为抽奖箱钥匙 \n" +
-            "${ChatColor.GOLD} /raffle save: ${ChatColor.WHITE}保存更改\n "
+            "${ChatColor.GOLD} /raffle save: ${ChatColor.WHITE}保存更改"
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) return false
         val isFormatValid = if (args.isNotEmpty()){
@@ -112,7 +115,9 @@ class RaffleCommand: CommandExecutor, TabCompleter {
                     true
                 }
                 "save" ->{
-                    RemiriyaRaffle.database.save()
+                    CoroutineScope(Dispatchers.Default).launch {
+                        RemiriyaRaffle.database.save()
+                    }
                     sender.sender().success("保存成功")
                     true
                 }
