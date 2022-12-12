@@ -30,7 +30,7 @@ class RaffleChest() {
             i -= it.weight
             if (i < 0){
                 player.giveItem(it.provideItemStack())
-                player.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 0.18F, 0.6F)
+                player.world.playSound(player.location, Sound.ENTITY_PLAYER_LEVELUP, 0.18F, 0.6F)
                 player.world.spawnParticle(Particle.TOTEM, player.location, 10, 0.5, 0.5, 0.5)
                 Bukkit.getPluginManager().callEvent(PlayerRaffleEvent(player, it.provideItemStack(), name, it.weight))
                 return

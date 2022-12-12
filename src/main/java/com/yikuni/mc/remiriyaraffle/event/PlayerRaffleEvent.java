@@ -11,7 +11,7 @@ public class PlayerRaffleEvent extends PlayerEvent {
     private final ItemStack itemStack;
     private final String chestName;
     private final int weight;
-    public PlayerRaffleEvent(@NotNull Player who, @NotNull ItemStack itemStack, @NotNull String chestName, @NotNull int weight) {
+    public PlayerRaffleEvent(@NotNull Player who, @NotNull ItemStack itemStack, @NotNull String chestName, int weight) {
         super(who);
         this.itemStack = itemStack;
         this.chestName = chestName;
